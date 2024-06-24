@@ -47,14 +47,27 @@
             txtCodBar = new TextBox();
             label5 = new Label();
             label4 = new Label();
-            dataGridView1 = new DataGridView();
-            button2 = new Button();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
+            dgvItensPedido = new DataGridView();
+            btnFechar = new Button();
+            txtDesconto = new TextBox();
+            txtOutros = new TextBox();
+            txtTotal = new TextBox();
+            txtSubTotal = new TextBox();
+            label8 = new Label();
+            label9 = new Label();
+            label10 = new Label();
+            label11 = new Label();
+            slnSeq = new DataGridViewTextBoxColumn();
+            slnCodBar = new DataGridViewTextBoxColumn();
+            slnDescricao = new DataGridViewTextBoxColumn();
+            slnUnitVenda = new DataGridViewTextBoxColumn();
+            clnValorUnit = new DataGridViewTextBoxColumn();
+            clnQuantdade = new DataGridViewTextBoxColumn();
+            clnDesconto = new DataGridViewTextBoxColumn();
+            clnValorItem = new DataGridViewTextBoxColumn();
             groupBox1.SuspendLayout();
             gbxProduto.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvItensPedido).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -98,7 +111,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(862, 23);
+            label2.Location = new Point(793, 43);
             label2.Name = "label2";
             label2.Size = new Size(51, 15);
             label2.TabIndex = 2;
@@ -108,7 +121,7 @@
             // 
             txtNumeroPedido.Font = new Font("Segoe UI", 24F);
             txtNumeroPedido.ForeColor = Color.Red;
-            txtNumeroPedido.Location = new Point(919, 20);
+            txtNumeroPedido.Location = new Point(793, 61);
             txtNumeroPedido.Name = "txtNumeroPedido";
             txtNumeroPedido.RightToLeft = RightToLeft.Yes;
             txtNumeroPedido.Size = new Size(169, 50);
@@ -237,57 +250,173 @@
             label4.TabIndex = 0;
             label4.Text = "Código de Barras";
             // 
-            // dataGridView1
+            // dgvItensPedido
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(36, 307);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(739, 245);
-            dataGridView1.TabIndex = 8;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dgvItensPedido.AllowUserToAddRows = false;
+            dgvItensPedido.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvItensPedido.Columns.AddRange(new DataGridViewColumn[] { slnSeq, slnCodBar, slnDescricao, slnUnitVenda, clnValorUnit, clnQuantdade, clnDesconto, clnValorItem });
+            dgvItensPedido.Location = new Point(36, 307);
+            dgvItensPedido.Name = "dgvItensPedido";
+            dgvItensPedido.ReadOnly = true;
+            dgvItensPedido.RowHeadersVisible = false;
+            dgvItensPedido.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvItensPedido.Size = new Size(739, 245);
+            dgvItensPedido.TabIndex = 8;
+            dgvItensPedido.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // button2
+            // btnFechar
             // 
-            button2.Font = new Font("Segoe UI", 14F);
-            button2.Location = new Point(795, 511);
-            button2.Name = "button2";
-            button2.Size = new Size(169, 41);
-            button2.TabIndex = 9;
-            button2.Text = "Finalizar Pedido";
-            button2.UseVisualStyleBackColor = true;
+            btnFechar.Font = new Font("Segoe UI", 14F);
+            btnFechar.Location = new Point(795, 511);
+            btnFechar.Name = "btnFechar";
+            btnFechar.Size = new Size(169, 41);
+            btnFechar.TabIndex = 9;
+            btnFechar.Text = "Finalizar Pedido";
+            btnFechar.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // txtDesconto
             // 
-            textBox4.Location = new Point(845, 390);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(119, 23);
-            textBox4.TabIndex = 10;
+            txtDesconto.Location = new Point(795, 380);
+            txtDesconto.Name = "txtDesconto";
+            txtDesconto.Size = new Size(119, 23);
+            txtDesconto.TabIndex = 10;
             // 
-            // textBox5
+            // txtOutros
             // 
-            textBox5.Location = new Point(846, 419);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(118, 23);
-            textBox5.TabIndex = 11;
+            txtOutros.Location = new Point(795, 424);
+            txtOutros.Name = "txtOutros";
+            txtOutros.Size = new Size(118, 23);
+            txtOutros.TabIndex = 11;
+            txtOutros.TextChanged += txtOutros_TextChanged;
             // 
-            // textBox6
+            // txtTotal
             // 
-            textBox6.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox6.Location = new Point(797, 448);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(167, 39);
-            textBox6.TabIndex = 12;
+            txtTotal.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtTotal.Location = new Point(795, 466);
+            txtTotal.Name = "txtTotal";
+            txtTotal.Size = new Size(167, 39);
+            txtTotal.TabIndex = 12;
+            // 
+            // txtSubTotal
+            // 
+            txtSubTotal.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSubTotal.Location = new Point(795, 307);
+            txtSubTotal.Name = "txtSubTotal";
+            txtSubTotal.Size = new Size(167, 39);
+            txtSubTotal.TabIndex = 13;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(795, 289);
+            label8.Name = "label8";
+            label8.Size = new Size(57, 15);
+            label8.TabIndex = 14;
+            label8.Text = "Sub-Total";
+            label8.Click += label8_Click;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(795, 362);
+            label9.Name = "label9";
+            label9.Size = new Size(57, 15);
+            label9.TabIndex = 15;
+            label9.Text = "Desconto";
+            label9.Click += label9_Click;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(795, 406);
+            label10.Name = "label10";
+            label10.Size = new Size(43, 15);
+            label10.TabIndex = 16;
+            label10.Text = "Outros";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(795, 450);
+            label11.Name = "label11";
+            label11.Size = new Size(32, 15);
+            label11.TabIndex = 17;
+            label11.Text = "Total";
+            label11.Click += label11_Click;
+            // 
+            // slnSeq
+            // 
+            slnSeq.Frozen = true;
+            slnSeq.HeaderText = "Seq";
+            slnSeq.Name = "slnSeq";
+            slnSeq.ReadOnly = true;
+            slnSeq.Width = 40;
+            // 
+            // slnCodBar
+            // 
+            slnCodBar.Frozen = true;
+            slnCodBar.HeaderText = "CodBar";
+            slnCodBar.Name = "slnCodBar";
+            slnCodBar.ReadOnly = true;
+            // 
+            // slnDescricao
+            // 
+            slnDescricao.Frozen = true;
+            slnDescricao.HeaderText = "Descrição";
+            slnDescricao.Name = "slnDescricao";
+            slnDescricao.ReadOnly = true;
+            slnDescricao.Width = 200;
+            // 
+            // slnUnitVenda
+            // 
+            slnUnitVenda.Frozen = true;
+            slnUnitVenda.HeaderText = "Unidade";
+            slnUnitVenda.Name = "slnUnitVenda";
+            slnUnitVenda.ReadOnly = true;
+            slnUnitVenda.Width = 60;
+            // 
+            // clnValorUnit
+            // 
+            clnValorUnit.Frozen = true;
+            clnValorUnit.HeaderText = "Valor Unit";
+            clnValorUnit.Name = "clnValorUnit";
+            clnValorUnit.ReadOnly = true;
+            // 
+            // clnQuantdade
+            // 
+            clnQuantdade.HeaderText = "Quantidade";
+            clnQuantdade.Name = "clnQuantdade";
+            clnQuantdade.ReadOnly = true;
+            clnQuantdade.Width = 70;
+            // 
+            // clnDesconto
+            // 
+            clnDesconto.HeaderText = "Desconto";
+            clnDesconto.Name = "clnDesconto";
+            clnDesconto.ReadOnly = true;
+            clnDesconto.Width = 70;
+            // 
+            // clnValorItem
+            // 
+            clnValorItem.HeaderText = "Valor Item";
+            clnValorItem.Name = "clnValorItem";
+            clnValorItem.ReadOnly = true;
             // 
             // FrmPedido
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1123, 587);
-            Controls.Add(textBox6);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(button2);
-            Controls.Add(dataGridView1);
+            ClientSize = new Size(971, 587);
+            Controls.Add(label11);
+            Controls.Add(label10);
+            Controls.Add(label9);
+            Controls.Add(label8);
+            Controls.Add(txtSubTotal);
+            Controls.Add(txtTotal);
+            Controls.Add(txtOutros);
+            Controls.Add(txtDesconto);
+            Controls.Add(btnFechar);
+            Controls.Add(dgvItensPedido);
             Controls.Add(gbxProduto);
             Controls.Add(btnAbrirNovo);
             Controls.Add(txtVendedor);
@@ -303,7 +432,7 @@
             groupBox1.PerformLayout();
             gbxProduto.ResumeLayout(false);
             gbxProduto.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvItensPedido).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -320,11 +449,11 @@
         private TextBox txtVendedor;
         private Button btnAbrirNovo;
         private GroupBox gbxProduto;
-        private DataGridView dataGridView1;
-        private Button button2;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox textBox6;
+        private DataGridView dgvItensPedido;
+        private Button btnFechar;
+        private TextBox txtDesconto;
+        private TextBox txtOutros;
+        private TextBox txtTotal;
         private TextBox txtValorUnit;
         private Label label6;
         private TextBox txtDescricao;
@@ -334,5 +463,18 @@
         private Button btnInserirItem;
         private Label label7;
         private TextBox txtQuantidade;
+        private TextBox txtSubTotal;
+        private Label label8;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private DataGridViewTextBoxColumn slnSeq;
+        private DataGridViewTextBoxColumn slnCodBar;
+        private DataGridViewTextBoxColumn slnDescricao;
+        private DataGridViewTextBoxColumn slnUnitVenda;
+        private DataGridViewTextBoxColumn clnValorUnit;
+        private DataGridViewTextBoxColumn clnQuantdade;
+        private DataGridViewTextBoxColumn clnDesconto;
+        private DataGridViewTextBoxColumn clnValorItem;
     }
 }

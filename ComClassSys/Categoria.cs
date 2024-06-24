@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Reflection.Metadata.Ecma335;
 namespace ComClassSys
 {
     public class Categoria
@@ -65,20 +66,20 @@ namespace ComClassSys
         }
         public static Categoria ObterPorId(int id)
         {
-            Categoria Categoria = new Categoria();
+            Categoria categoria = new();
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = $"select * from categorias where id ={id}";
-            var dr = cmd.ExecuteReader();// dr =  DataReader = retorno da consulta (caso haja)
+            cmd.CommandText = $"select * from categorias where id={id}";
+            var dr = cmd.ExecuteReader();
+
             while (dr.Read())
             {
-                // 1ª forma
-                Categoria = new(dr.GetInt32(0)
-                    , dr.GetString(1)
-                    , dr.GetString(2)
-                    );
+                categoria.Id = dr.GetInt32(0);
+                categoria.Nome = dr.GetString(1);
+                categoria.Sigla = null;
             }
-            return Categoria;
+
+            return categoria;
         }
         public static List<Categoria> ObterLista(string nome = null)
         {
@@ -97,14 +98,15 @@ namespace ComClassSys
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                lista.Add(new Categoria(
-                                      dr.GetInt32(0),
-                                      dr.GetString(1),
-                                      dr.GetString(2)
-                                    
-                                     ));
+                Categoria cat = new Categoria();
+                cat.Id = dr.GetInt32(0);
+                cat.Nome = dr.GetString(1);
+                cat.Sigla = null;
+
+                lista.Add(cat);
             }
             return lista;
         }
+       }
     }
-}
+

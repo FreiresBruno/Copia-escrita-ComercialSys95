@@ -54,7 +54,7 @@ namespace ComClassSys
             cmd.Parameters.AddWithValue("spproduto_id",Produto.Id);
             cmd.Parameters.AddWithValue("spquantidade", Quantidade);
             cmd.Parameters.AddWithValue("spdesconto", Desconto);
-            Id = Convert.ToInt32(cmd.ExecuteScalar());
+           Id = Convert.ToInt32(cmd.ExecuteScalar());
 
         }
         // Consultar Item de pedido (Obter por id ped e id prod) 

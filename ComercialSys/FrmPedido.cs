@@ -75,12 +75,54 @@ namespace ComercialSys
         {
             ItemPedido itemPedido = new(
                 int.Parse(txtNumeroPedido.Text)
-                ,Produto.BuscarPorId(int.Parse(txtCodBar.Text))
-                ,double.Parse(txtValorUnit.Text)
+                , Produto.BuscarPorId(int.Parse(txtCodBar.Text))
+                , double.Parse(txtValorUnit.Text)
                 , double.Parse(txtQuantidade.Text)
-                ,0
+                , double.Parse(txtDesconto.Text)
             );
             itemPedido.Inserir();
+
+            // limpar o datagrid
+            dgvItensPedido.Rows.Clear();
+            var items = ItemPedido.ObterListaPorPedido(int.Parse(txtNumeroPedido.Text));
+            int cont = 0;
+            double subTotal = 0;
+            foreach (var item in items)
+            {
+                dgvItensPedido.Rows.Add();
+                dgvItensPedido.Rows[cont].Cells[0].Value = $"#{cont + 1}";//seq
+                dgvItensPedido.Rows[cont].Cells[1].Value = item.Produto.CodBarras;//codbar
+                dgvItensPedido.Rows[cont].Cells[2].Value = item.Produto.Descricao;//descrição
+                dgvItensPedido.Rows[cont].Cells[3].Value = item.Produto.UnidadeVenda;//unidade venda
+                dgvItensPedido.Rows[cont].Cells[4].Value = item.ValorUnit;//valor unitario
+                dgvItensPedido.Rows[cont].Cells[5].Value = item.Quantidade;//quantidade
+                dgvItensPedido.Rows[cont].Cells[6].Value = item.Desconto;//desconto
+                dgvItensPedido.Rows[cont].Cells[7].Value = item.ValorUnit * item.Quantidade - item.Desconto ;//valor
+                subTotal += item.ValorUnit * item.Quantidade - item.Desconto;
+                cont++;
+            }
+            txtSubTotal.Text = subTotal.ToString();
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtOutros_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
