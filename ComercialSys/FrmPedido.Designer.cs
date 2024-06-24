@@ -60,9 +60,12 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = SystemColors.ButtonFace;
+            label1.Font = new Font("Segoe UI", 18F);
+            label1.ForeColor = SystemColors.ActiveCaptionText;
             label1.Location = new Point(36, 20);
             label1.Name = "label1";
-            label1.Size = new Size(44, 15);
+            label1.Size = new Size(87, 32);
             label1.TabIndex = 0;
             label1.Text = "Pedido";
             // 
