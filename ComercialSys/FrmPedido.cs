@@ -17,7 +17,7 @@ namespace ComercialSys
         {
             InitializeComponent();
         }
-
+        Produto produto = new();
         private void FrmPedido_Load(object sender, EventArgs e)
         {
             txtVendedor.Text = Program.Usuario.Id + " - " + Program.Usuario.Nome;
@@ -81,6 +81,13 @@ namespace ComercialSys
                 , double.Parse(txtDesconto.Text)
             );
             itemPedido.Inserir();
+            //limpa controles
+            txtCodBar.Clear();
+            txtDesconto.Text = "0";
+            txtDescricao.Clear();
+            txtQuantidade.Text = "1";
+            txtValorUnit.Clear();
+            txtCodBar.Focus();
 
             // limpar o datagrid
             dgvItensPedido.Rows.Clear();
@@ -97,7 +104,8 @@ namespace ComercialSys
                 dgvItensPedido.Rows[cont].Cells[4].Value = item.ValorUnit;//valor unitario
                 dgvItensPedido.Rows[cont].Cells[5].Value = item.Quantidade;//quantidade
                 dgvItensPedido.Rows[cont].Cells[6].Value = item.Desconto;//desconto
-                dgvItensPedido.Rows[cont].Cells[7].Value = item.ValorUnit * item.Quantidade - item.Desconto ;//valor
+                dgvItensPedido.Rows[cont].Cells[8].Value = item.Id;
+                dgvItensPedido.Rows[cont].Cells[7].Value = item.ValorUnit * item.Quantidade - item.Desconto;//valor
                 subTotal += item.ValorUnit * item.Quantidade - item.Desconto;
                 cont++;
             }
@@ -105,24 +113,43 @@ namespace ComercialSys
 
         }
 
-        private void label8_Click(object sender, EventArgs e)
-        {
 
+        private void txtQuantidade_TextChanged(object sender, EventArgs e)
+        {
+            {
+                if (txtQuantidade.Text.Length > 0)
+                {
+                    lblDescMax.Text = $"R$ {produto.ClasseDesconto * produto.ValorUnit * decimal.Parse(txtQuantidade.Text)}";
+                }
+            }
+        }
+        private void dgvItens_rowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            if (dgvItensPedido.Rows.Count > 0)
+            {
+                MessageBox.Show("Vamos remover a linha: " + e.RowIndex);
+            }
         }
 
-        private void label9_Click(object sender, EventArgs e)
+        private void btnExcluirItem_Click(object sender, EventArgs e)
         {
+            if (dgvItensPedido.Rows.Count > 0)
+            {
+                int linha = dgvItensPedido.CurrentRow.Index;
+                string seq = dgvItensPedido.Rows[linha].Cells[0].Value.ToString();
+                var confirma = MessageBox.Show($"Deseja remover este item {seq}?", "Remover Item",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button2);
 
-        }
 
-        private void txtOutros_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
+                ItemPedido.Remover(Convert.ToInt32(dgvItensPedido.Rows[linha].Cells[0]));
+                if (confirma == DialogResult.Yes)
+                {
+                    ItemPedido.Remover(Convert.ToInt32(dgvItensPedido.Rows[linha].Cells[0].Value));
+                    MessageBox.Show("Vamos remover a linha: " + dgvItensPedido.CurrentRow.Index);
+                }
+            }
         }
     }
 }
