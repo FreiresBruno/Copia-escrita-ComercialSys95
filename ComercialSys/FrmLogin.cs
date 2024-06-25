@@ -38,16 +38,21 @@ namespace ComercialSys
                     Program.Usuario = usuario;
                     this.Close();
                 }
-                else 
+                else
                 {
                     MessageBox.Show("Email e/ou senha inválidos");
                     txtEmail.Focus();
                 }
             }
-            else 
+            else
             {
                 MessageBox.Show("Digite um email e senha para prosseguir!!!");
             }
+        }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
